@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Catalogue Movie</string>
+    <string name="btn_detail">detail</string>
+    <string name="btn_share">share</string>
+    <string name="poster_movie">poster movie</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="search">Search</string>
+    <string name="share">Share</string>
+    <string name="send">Send</string>
+    <string name="communicate">Communicate</string>
+    <string name="action_settings">Language Settings</string>
+</resources>
