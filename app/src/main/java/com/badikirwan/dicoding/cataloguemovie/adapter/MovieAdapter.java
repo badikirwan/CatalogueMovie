@@ -1,5 +1,6 @@
 package com.badikirwan.dicoding.cataloguemovie.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.badikirwan.dicoding.cataloguemovie.CustomOnItemClickListener;
+import com.badikirwan.dicoding.cataloguemovie.BuildConfig;
 import com.badikirwan.dicoding.cataloguemovie.R;
 import com.badikirwan.dicoding.cataloguemovie.activity.DetailMovieActivity;
 import com.badikirwan.dicoding.cataloguemovie.model.MovieModel;
@@ -45,13 +46,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         final MovieModel movie = listMovie.get(position);
-
-        Glide.with(context)
-                .load("http://image.tmdb.org/t/p/w500/" + movie.getMovie_poter())
-                .into(holder.poster_movie);
-
         String release_date = movie.getMoview_release_date();
+        @SuppressLint("SimpleDateFormat")
         SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
+        @SuppressLint("SimpleDateFormat")
         SimpleDateFormat new_date_format = new SimpleDateFormat("E, MMM dd, yyyy");
 
         try {
@@ -84,12 +82,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                context.startActivity(intent);
            }
         }));
+
         holder.btn_share.setOnClickListener(new CustomOnItemClickListener(position, new CustomOnItemClickListener.OnItemClickCallback() {
             @Override
             public void onItemClicked(View view, int position) {
                 Toast.makeText(context, "Share movie", Toast.LENGTH_SHORT).show();
             }
         }));
+
+        Glide.with(context)
+                .load(BuildConfig.POSTER_URL + movie.getMovie_poter())
+                .into(holder.poster_movie);Glide.with(context)
+                .load(BuildConfig.POSTER_URL + movie.getMovie_poter())
+                .into(holder.poster_movie);
 
     }
 
@@ -107,10 +112,29 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         @BindView(R.id.btn_detail_movie) Button btn_detail;
         @BindView(R.id.btn_share_movie) Button btn_share;
 
-        public MovieViewHolder(View itemView) {
+        MovieViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
 
+    static class CustomOnItemClickListener implements View.OnClickListener {
+
+        private int position;
+        private OnItemClickCallback onItemClickCallback;
+
+        CustomOnItemClickListener(int position, CustomOnItemClickListener.OnItemClickCallback onItemClickCallback) {
+            this.position = position;
+            this.onItemClickCallback = onItemClickCallback;
+        }
+
+        @Override
+        public void onClick(View view) {
+            onItemClickCallback.onItemClicked(view, position);
+        }
+
+        public interface OnItemClickCallback {
+            void onItemClicked(View view, int position);
+        }
+    }
 }

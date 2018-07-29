@@ -3,16 +3,10 @@ package com.badikirwan.dicoding.cataloguemovie.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,42 +15,42 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.badikirwan.dicoding.cataloguemovie.R;
 import com.badikirwan.dicoding.cataloguemovie.adapter.ViewPagerAdapter;
 import com.badikirwan.dicoding.cataloguemovie.fragment.NowplayingFragment;
 import com.badikirwan.dicoding.cataloguemovie.fragment.UpcomingFragment;
 
-import java.util.ArrayList;
-import java.util.List;
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-import butterknife.BindView;
-
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private Fragment fragment;
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.viewpager) ViewPager viewPager;
-    @BindView(R.id.tabs) TabLayout tabLayout;
-    @BindView(R.id.nav_view) NavigationView navigationView;
-    @BindView(R.id.drawer_layout) DrawerLayout drawer;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -73,9 +67,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);
-                intentSearch.putExtra("KEYWORD", query);
-                startActivity(intentSearch);
+                Intent search = new Intent(MainActivity.this, SearchActivity.class);
+                search.putExtra("keyword", query);
+                startActivity(search);
                 return false;
             }
 
@@ -105,29 +99,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.nav_camera:
-                fragment = new NowplayingFragment();
+        switch (item.getItemId()) {
+            case R.id.nav_nowplaying:
+                viewPager.setCurrentItem(0);
                 break;
-            case R.id.nav_gallery:
-                fragment = new UpcomingFragment();
+            case R.id.nav_upcoming:
+                viewPager.setCurrentItem(1);
                 break;
-            default:
+            case R.id.nav_share:
+                Toast.makeText(this, "Share is clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_send :
+                Toast.makeText(this, "Send is clicked", Toast.LENGTH_SHORT).show();
                 break;
         }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content, fragment).commit();
-        setTitle(item.getTitle());
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    public void setupViewPager(ViewPager upViewPager) {
+    public void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new NowplayingFragment(), getString(R.string.now_playing));
         adapter.addFragment(new UpcomingFragment(), getString(R.string.upcoming));
