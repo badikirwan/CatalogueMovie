@@ -27,6 +27,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -34,8 +37,8 @@ public class UpcomingFragment extends Fragment {
 
     private static final String API_URL = "https://api.themoviedb.org/3/movie/upcoming?api_key=" + BuildConfig.API_KEY;
     private ArrayList<MovieModel> lisMovies;
-    private RecyclerView rvMovie;
     private MovieAdapter adapter;
+    @BindView(R.id.recycler_view) RecyclerView rvMovie;
 
     public UpcomingFragment() {
         // Required empty public constructor
@@ -46,7 +49,7 @@ public class UpcomingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nowplaying, container, false);
-        rvMovie = view.findViewById(R.id.recycler_view);
+        ButterKnife.bind(this, view);
         rvMovie.setHasFixedSize(true);
         rvMovie.setLayoutManager(new LinearLayoutManager(getActivity()));
         lisMovies = new ArrayList<>();

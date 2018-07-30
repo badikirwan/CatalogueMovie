@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Catalogue Movie</string>
+    <string name="app_name_detail">Detail Movie</string>
+    <string name="app_name_search">Result Search Movie</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>

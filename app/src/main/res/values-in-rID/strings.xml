@@ -11,4 +11,6 @@
     <string name="send">Kirim</string>
     <string name="action_settings">Pengaturan Bahasa</string>
     <string name="poster_movie">poster film</string>
+    <string name="app_name_detail">Detail Film</string>
+    <string name="app_name_search">Hasil Pencarian Film</string>
 </resources>

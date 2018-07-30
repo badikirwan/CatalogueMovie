@@ -22,19 +22,22 @@ import com.badikirwan.dicoding.cataloguemovie.adapter.ViewPagerAdapter;
 import com.badikirwan.dicoding.cataloguemovie.fragment.NowplayingFragment;
 import com.badikirwan.dicoding.cataloguemovie.fragment.UpcomingFragment;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ViewPager viewPager;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.tabs) TabLayout tabLayout;
+    @BindView(R.id.viewpager) ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        TabLayout tabLayout = findViewById(R.id.tabs);
-        viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
+
         return true;
     }
 
