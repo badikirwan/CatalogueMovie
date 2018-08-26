@@ -1,21 +1,21 @@
-package com.badikirwan.dicoding.cataloguemovie.model;
+package com.badikirwan.dicoding.myfavorite.model;
 
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import static android.provider.BaseColumns._ID;
-import static com.badikirwan.dicoding.cataloguemovie.db.DatabaseContract.FavoriteColumn.BACKDROP;
-import static com.badikirwan.dicoding.cataloguemovie.db.DatabaseContract.FavoriteColumn.DESCRIPTION;
-import static com.badikirwan.dicoding.cataloguemovie.db.DatabaseContract.FavoriteColumn.ID;
-import static com.badikirwan.dicoding.cataloguemovie.db.DatabaseContract.FavoriteColumn.LANG;
-import static com.badikirwan.dicoding.cataloguemovie.db.DatabaseContract.FavoriteColumn.POPULARITY;
-import static com.badikirwan.dicoding.cataloguemovie.db.DatabaseContract.FavoriteColumn.POSTER;
-import static com.badikirwan.dicoding.cataloguemovie.db.DatabaseContract.FavoriteColumn.RATING;
-import static com.badikirwan.dicoding.cataloguemovie.db.DatabaseContract.FavoriteColumn.RELEASE_DATE;
-import static com.badikirwan.dicoding.cataloguemovie.db.DatabaseContract.FavoriteColumn.TITLE;
-import static com.badikirwan.dicoding.cataloguemovie.db.DatabaseContract.getColumnInt;
-import static com.badikirwan.dicoding.cataloguemovie.db.DatabaseContract.getColumnString;
+import static com.badikirwan.dicoding.myfavorite.db.DatabaseContract.FavoriteColumn.BACKDROP;
+import static com.badikirwan.dicoding.myfavorite.db.DatabaseContract.FavoriteColumn.DESCRIPTION;
+import static com.badikirwan.dicoding.myfavorite.db.DatabaseContract.FavoriteColumn.ID;
+import static com.badikirwan.dicoding.myfavorite.db.DatabaseContract.FavoriteColumn.LANG;
+import static com.badikirwan.dicoding.myfavorite.db.DatabaseContract.FavoriteColumn.POPULARITY;
+import static com.badikirwan.dicoding.myfavorite.db.DatabaseContract.FavoriteColumn.POSTER;
+import static com.badikirwan.dicoding.myfavorite.db.DatabaseContract.FavoriteColumn.RATING;
+import static com.badikirwan.dicoding.myfavorite.db.DatabaseContract.FavoriteColumn.RELEASE_DATE;
+import static com.badikirwan.dicoding.myfavorite.db.DatabaseContract.FavoriteColumn.TITLE;
+import static com.badikirwan.dicoding.myfavorite.db.DatabaseContract.getColumnInt;
+import static com.badikirwan.dicoding.myfavorite.db.DatabaseContract.getColumnString;
+
 
 public class MovieModel implements Parcelable {
 
@@ -146,7 +146,7 @@ public class MovieModel implements Parcelable {
         this.movie_language = in.readString();
     }
 
-    public static final Parcelable.Creator<MovieModel> CREATOR = new Parcelable.Creator<MovieModel>() {
+    public static final Creator<MovieModel> CREATOR = new Creator<MovieModel>() {
         @Override
         public MovieModel createFromParcel(Parcel source) {
             return new MovieModel(source);

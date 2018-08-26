@@ -72,7 +72,8 @@ public class SearchActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                MovieAdapter adapter = new MovieAdapter(getApplicationContext(), lisMovies);
+                MovieAdapter adapter = new MovieAdapter(getApplicationContext());
+                adapter.setListMovie(lisMovies);
                 rvMovie.setAdapter(adapter);
 
             }

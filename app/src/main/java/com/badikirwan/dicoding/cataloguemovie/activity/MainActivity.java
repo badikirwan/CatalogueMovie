@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.badikirwan.dicoding.cataloguemovie.R;
 import com.badikirwan.dicoding.cataloguemovie.adapter.ViewPagerAdapter;
+import com.badikirwan.dicoding.cataloguemovie.fragment.FavoriteFragment;
 import com.badikirwan.dicoding.cataloguemovie.fragment.NowplayingFragment;
 import com.badikirwan.dicoding.cataloguemovie.fragment.UpcomingFragment;
 
@@ -112,6 +113,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_upcoming:
                 viewPager.setCurrentItem(1);
                 break;
+            case R.id.nav_favorite:
+                viewPager.setCurrentItem(2);
+                break;
             case R.id.nav_share:
                 Toast.makeText(this, "Share is clicked", Toast.LENGTH_SHORT).show();
                 break;
@@ -129,6 +133,7 @@ public class MainActivity extends AppCompatActivity
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new NowplayingFragment(), getString(R.string.now_playing));
         adapter.addFragment(new UpcomingFragment(), getString(R.string.upcoming));
+        adapter.addFragment(new FavoriteFragment(), getString(R.string.favorite_movie));
         viewPager.setAdapter(adapter);
     }
 

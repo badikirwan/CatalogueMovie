@@ -16,9 +16,15 @@
     <string name="nav_header_email">badikirwan@gmail.com</string>
     <string name="now_playing">Now Playing</string>
     <string name="upcoming">Upcoming</string>
+    <string name="favorite_movie">Favorite Movie</string>
     <string name="search">Search</string>
     <string name="communicate">Communicate</string>
     <string name="share">Share</string>
     <string name="send">Send</string>
-    <string name="detail">detail</string>
+    <string name="detail">Detail</string>
+    <string name="favorite">Favorite</string>
+    <string name="release_date">Release Date</string>
+    <string name="rating">Rating</string>
+    <string name="popularity">Popularity</string>
+    <string name="language">Language</string>
 </resources>

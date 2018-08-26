@@ -85,7 +85,8 @@ public class UpcomingFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                adapter = new MovieAdapter(getActivity(), lisMovies);
+                adapter = new MovieAdapter(getActivity());
+                adapter.setListMovie(lisMovies);
                 rvMovie.setAdapter(adapter);
             }
         }, new Response.ErrorListener() {
