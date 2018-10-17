@@ -10,7 +10,7 @@
     <string name="share">Share</string>
     <string name="send">Send</string>
     <string name="communicate">Communicate</string>
-    <string name="action_settings">Language Settings</string>
+    <string name="action_settings">Settings</string>
     <string name="app_name_detail">Detail Movie</string>
     <string name="app_name_search">Result Search Movie</string>
 </resources>

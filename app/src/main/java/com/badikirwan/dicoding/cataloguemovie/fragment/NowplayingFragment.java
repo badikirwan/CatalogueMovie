@@ -35,9 +35,9 @@ import butterknife.ButterKnife;
  */
 public class NowplayingFragment extends Fragment {
 
-    private static final String API_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=" + BuildConfig.API_KEY;
     private ArrayList<MovieModel> lisMovies;
     private MovieAdapter adapter;
+
     @BindView(R.id.recycler_view) RecyclerView rvMovie;
 
     public NowplayingFragment() {
@@ -60,7 +60,8 @@ public class NowplayingFragment extends Fragment {
 
     private void loadData() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                BuildConfig.API_NOWPLAYING + BuildConfig.API_KEY, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 

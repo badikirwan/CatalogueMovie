@@ -35,9 +35,9 @@ import butterknife.ButterKnife;
  */
 public class UpcomingFragment extends Fragment {
 
-    private static final String API_URL = "https://api.themoviedb.org/3/movie/upcoming?api_key=" + BuildConfig.API_KEY;
     private ArrayList<MovieModel> lisMovies;
     private MovieAdapter adapter;
+
     @BindView(R.id.recycler_view) RecyclerView rvMovie;
 
     public UpcomingFragment() {
@@ -62,7 +62,7 @@ public class UpcomingFragment extends Fragment {
     private void loadData() {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                API_URL, new Response.Listener<String>() {
+                BuildConfig.API_UPCOMING + BuildConfig.API_KEY, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -73,11 +73,15 @@ public class UpcomingFragment extends Fragment {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject data = jsonArray.getJSONObject(i);
                         MovieModel movie = new MovieModel();
+                        movie.setMovie_id(data.getInt("id"));
                         movie.setMovie_title(data.getString("title"));
                         movie.setMovie_overview(data.getString("overview"));
                         movie.setMoview_release_date(data.getString("release_date"));
                         movie.setMovie_poter(data.getString("poster_path"));
                         movie.setMovie_backdrop(data.getString("backdrop_path"));
+                        movie.setMovie_vote(data.getString("vote_average"));
+                        movie.setMovie_popularity(data.getString("popularity"));
+                        movie.setMovie_language(data.getString("original_language"));
                         lisMovies.add(movie);
                     }
 

@@ -136,7 +136,6 @@ public class DetailMovieActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(BuildConfig.POSTER_URL + movie.getMovie_backdrop())
-                .crossFade()
                 .into(imgBackdrop);
     }
 
